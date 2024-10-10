@@ -1,5 +1,6 @@
 package org.example;
-
+import org.example.Payment.CardPayment;
+import org.example.Payment.OnlineBankingPayment;
 import org.example.Repository.CarRepository;
 import org.example.Repository.CustomerRepository;
 import org.example.Repository.ReservationRepository;
@@ -7,7 +8,6 @@ import org.example.Model.Car;
 import org.example.Model.Customer;
 import org.example.Model.Reservation;
 import org.example.Services.ReservationService;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +27,7 @@ public class Main {
                 carRepository.addCar(new Car("Ford", "Focus", 2021, "DEF789", 45.0));
 
                 customerRepository.addCustomer(new Customer("Alice Smith", "New York", "NY12345"));
-                customerRepository.addCustomer(new Customer("Bob Johnson", "Los Angeles", "CA67890"));
+                customerRepository.addCustomer(new Customer("Ram", "Bangalore", "CA67890"));
 
                 Scanner scanner = new Scanner(System.in);
                 int userOpt = 1;
@@ -77,10 +77,57 @@ public class Main {
 
                                         // Check availability
                                         if (reservationService.isCarAvailable(licensePlate, startDate, endDate)) {
-                                                // Create a new reservation
-                                                Reservation reservation = new Reservation(customer.getName(), licensePlate, startDate, endDate);
+                                                Car selectedCar = CarRepository.getCarByLicensePlate(licensePlate); // Get the selected car
+                                                double rentalPrice = selectedCar.getRentalPrice(); // Get the rental price from the selected car
+
+                                                // Create a new reservation with the rental price
+                                                Reservation reservation = new Reservation(customer.getName(), licensePlate, startDate, endDate, rentalPrice);
                                                 reservationService.addReservation(reservation);
                                                 System.out.println("Your reservation is confirmed.");
+                                                System.out.println("Total Amount: $" + reservation.getTotalAmount()); // Display total amount
+
+                                                // Payment Process
+                                                System.out.println("Choose a payment method: ");
+                                                System.out.println("1. Card Payment");
+                                                System.out.println("2. Online Banking Payment");
+                                                int paymentChoice = scanner.nextInt();
+
+                                                if (paymentChoice == 1) {
+                                                        // Process Card Payment
+                                                        System.out.println("Enter card number:");
+                                                        String cardNumber = scanner.next();
+                                                        System.out.println("Enter card holder name:");
+                                                        String cardHolderName = scanner.next();
+                                                        System.out.println("Enter expiry date (MM/YY):");
+                                                        String expiryDate = scanner.next();
+                                                        System.out.println("Enter CVV:");
+                                                        String cvv = scanner.next();
+
+                                                        CardPayment cardPayment = new CardPayment(reservation.getTotalAmount(), cardNumber, cardHolderName, expiryDate, cvv);
+                                                        boolean paymentStatus = cardPayment.processPayment();
+                                                        if (paymentStatus) {
+                                                                System.out.println("Payment successful!");
+                                                        } else {
+                                                                System.out.println("Payment failed!");
+                                                        }
+                                                } else if (paymentChoice == 2) {
+                                                        // Process Online Banking Payment
+                                                        System.out.println("Enter your bank account number:");
+                                                        String bankAccountNumber = scanner.next();
+                                                        System.out.println("Enter your bank name:");
+                                                        String bankName = scanner.next();
+
+                                                        OnlineBankingPayment bankPayment = new OnlineBankingPayment(reservation.getTotalAmount(),bankAccountNumber, bankName);
+                                                        boolean paymentStatus = bankPayment.processPayment();
+                                                        if (paymentStatus) {
+                                                                System.out.println("Payment successful!");
+                                                        } else {
+                                                                System.out.println("Payment failed!");
+                                                        }
+                                                } else {
+                                                        System.out.println("Invalid payment method selected.");
+                                                }
+
                                         } else {
                                                 System.out.println("Sorry, the car is not available for the selected dates.");
                                         }

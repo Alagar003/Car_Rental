@@ -1,12 +1,16 @@
 package org.example.Payment;
 
 public abstract class Payment {
+    protected double amount;
 
-    // Abstract method to process a payment
-    public abstract boolean processPayment(double amount);
-
-    // Common method for all payment methods (optional)
-    public void paymentSuccessMessage(double amount) {
-        System.out.println("Payment of $" + amount + " was successful.");
+    public Payment(double amount) {
+        this.amount = amount;
     }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    // Abstract method that must be implemented by all subclasses
+    public abstract boolean processPayment();
 }

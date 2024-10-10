@@ -1,8 +1,5 @@
 package org.example.Repository;
-
-
 import org.example.Model.Reservation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +7,7 @@ public class ReservationRepository {
     private List<Reservation> reservations;
 
     public ReservationRepository() {
-        this.reservations = new ArrayList<>(); // Start with an empty list
+        this.reservations = new ArrayList<>();
     }
 
     // Method to add a reservation

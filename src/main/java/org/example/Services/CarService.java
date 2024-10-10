@@ -1,9 +1,6 @@
 package org.example.Services;
-
-
 import org.example.Model.Car;
 import org.example.Repository.CarRepository;
-
 import java.util.ArrayList;
 
 public class CarService {

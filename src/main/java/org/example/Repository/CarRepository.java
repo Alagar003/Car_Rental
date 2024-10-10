@@ -1,16 +1,13 @@
 package org.example.Repository;
-
-
 import org.example.Model.Car;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarRepository {
-    private List<Car> cars;
+    private static List<Car> cars;
 
     public CarRepository() {
-        this.cars = new ArrayList<>(); // Start with an empty list
+        this.cars = new ArrayList<>();
     }
 
     // Method to get all cars
@@ -22,4 +19,18 @@ public class CarRepository {
     public void addCar(Car car) {
         cars.add(car);
     }
+
+    public void removeCar(Car car) {
+        cars.remove(car);
+    }
+
+    public static Car getCarByLicensePlate(String licensePlate) {
+        for (Car car : cars) {
+            if (car.getLicensePlate().equals(licensePlate)) {
+                return car;
+            }
+        }
+        return null;
+    }
+
 }

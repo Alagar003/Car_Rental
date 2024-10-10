@@ -1,8 +1,5 @@
 package org.example.Repository;
-
-
 import org.example.Model.Customer;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +7,7 @@ public class CustomerRepository {
     private List<Customer> customers;
 
     public CustomerRepository() {
-        this.customers = new ArrayList<>(); // Start with an empty list
+        this.customers = new ArrayList<>();
     }
 
     // Method to get all customers
@@ -30,6 +27,6 @@ public class CustomerRepository {
                 return customer;
             }
         }
-        return null; // Customer not found
+        return null;
     }
 }
