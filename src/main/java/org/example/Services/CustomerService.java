@@ -1,6 +1,6 @@
 package org.example.Services;
 import org.example.Model.Customer;
-import org.example.Repository.CustomerRepository;
+import org.example.DAL.CustomerRepository;
 
 import java.util.ArrayList;
 

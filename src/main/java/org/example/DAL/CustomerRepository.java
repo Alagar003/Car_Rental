@@ -1,4 +1,4 @@
-package org.example.Repository;
+package org.example.DAL;
 import org.example.Model.Customer;
 import java.util.ArrayList;
 import java.util.List;

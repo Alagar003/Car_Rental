@@ -1,4 +1,4 @@
-package org.example.Repository;
+package org.example.DAL;
 import org.example.Model.Reservation;
 import java.util.ArrayList;
 import java.util.List;

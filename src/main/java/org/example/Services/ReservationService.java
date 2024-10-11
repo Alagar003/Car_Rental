@@ -1,6 +1,6 @@
 package org.example.Services;
 import org.example.Model.Reservation;
-import org.example.Repository.ReservationRepository;
+import org.example.DAL.ReservationRepository;
 import java.util.Date;
 
 public class ReservationService {

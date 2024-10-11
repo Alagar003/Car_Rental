@@ -1,9 +1,9 @@
 package org.example;
 import org.example.Payment.CardPayment;
 import org.example.Payment.OnlineBankingPayment;
-import org.example.Repository.CarRepository;
-import org.example.Repository.CustomerRepository;
-import org.example.Repository.ReservationRepository;
+import org.example.DAL.CarRepository;
+import org.example.DAL.CustomerRepository;
+import org.example.DAL.ReservationRepository;
 import org.example.Model.Car;
 import org.example.Model.Customer;
 import org.example.Model.Reservation;
